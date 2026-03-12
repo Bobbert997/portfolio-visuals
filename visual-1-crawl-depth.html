@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crawl Depth: Before vs After</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0f0f; --paper: #f7f5f0; --card: #ffffff;
+    --accent2: #c84b2f; --muted: #6b6560; --line: #e2dfd9; --green: #2d6a4f;
+  }
+  body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); padding: 20px 16px; }
+  .title {
+    font-family: 'DM Serif Display', serif; font-size: 20px;
+    color: var(--ink); margin-bottom: 18px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Mobile-first: stacked single column */
+  .crawl-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .crawl-side { background: var(--card); padding: 20px 16px 24px; }
+  .crawl-side-label { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px; }
+  .crawl-side.before .crawl-side-label { color: var(--accent2); }
+  .crawl-side.after .crawl-side-label { color: var(--green); }
+  .depth-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .depth-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); width: 46px; flex-shrink: 0; }
+  .depth-bar-wrap { flex: 1; height: 26px; background: var(--paper); border-radius: 4px; overflow: hidden; }
+  .depth-bar { height: 100%; width: 0; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 10px; font-weight: 600; color: white; white-space: nowrap; }
+  .before .depth-bar { background: #c84b2f; }
+  .after .depth-bar { background: #2d6a4f; }
+  @keyframes growBar { to { width: var(--target-width); } }
+  .animate .depth-bar { animation: growBar 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: var(--delay, 0s); }
+  .depth-note { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 12px 0; }
+  .depth-note strong { color: var(--ink); font-weight: 500; }
+  .crawl-verdict { margin-top: 14px; background: var(--paper); border-radius: 8px; padding: 10px 12px; font-size: 12px; font-weight: 500; }
+  .before .crawl-verdict { color: var(--accent2); }
+  .after .crawl-verdict { color: var(--green); }
+
+  /* Desktop: side by side */
+  @media (min-width: 640px) {
+    body { padding: 32px; }
+    .title { font-size: 22px; }
+    .crawl-grid { flex-direction: row; }
+    .crawl-side { flex: 1; padding: 28px 24px 32px; }
+    .depth-label { font-size: 11px; width: 52px; }
+    .depth-bar { font-size: 11px; padding-left: 10px; }
+    .depth-bar-wrap { height: 28px; }
+    .depth-bar-row { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+  <h2 class="title">Crawl Depth: Before vs After</h2>
+  <div class="crawl-grid" id="crawlGrid">
+    <div class="crawl-side before">
+      <p class="crawl-side-label">Before Restructure</p>
+      <div class="depth-bar-row"><span class="depth-label">Level 1</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:30%;--delay:0.1s">Home</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 2</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:45%;--delay:0.2s">All Products</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 3</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:60%;--delay:0.3s">By Rooms</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 4</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:75%;--delay:0.4s">Category</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 5</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:90%;--delay:0.5s">Sub-Category</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 6+</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:100%;--delay:0.6s">Product Page</div></div></div>
+      <div class="crawl-verdict">⚠ Pages buried 6+ clicks from homepage</div>
+    </div>
+    <div class="crawl-side after">
+      <p class="crawl-side-label">After Restructure</p>
+      <div class="depth-bar-row"><span class="depth-label">Level 1</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:30%;--delay:0.1s">Home</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 2</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:60%;--delay:0.2s">Silo Hub</div></div></div>
+      <div class="depth-bar-row"><span class="depth-label">Level 3</span><div class="depth-bar-wrap"><div class="depth-bar" style="--target-width:85%;--delay:0.3s">Category Page</div></div></div>
+      <p class="depth-note"><strong>Excess depth eliminated.</strong><br>All pages reachable within 3 clicks of the homepage.</p>
+      <div class="crawl-verdict">✓ Max 3 levels deep, site-wide</div>
+    </div>
+  </div>
+<script>
+  window.addEventListener('load', () => { document.getElementById('crawlGrid').classList.add('animate'); });
+</script>
+</body>
+</html>

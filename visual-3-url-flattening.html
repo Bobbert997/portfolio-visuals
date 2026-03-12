@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Flattening — Before & After</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0f0f; --paper: #f7f5f0; --card: #ffffff;
+    --accent2: #c84b2f; --muted: #6b6560; --line: #e2dfd9; --green: #2d6a4f;
+  }
+  body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); padding: 20px 16px; }
+  .title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--ink); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .url-cards { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Mobile: stacked card (before on top, arrow, after below) */
+  .url-card {
+    background: var(--card); border-radius: 10px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto auto;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .url-card.visible { opacity: 1; transform: none; }
+  .url-card:nth-child(1) { transition-delay: 0.1s; }
+  .url-card:nth-child(2) { transition-delay: 0.25s; }
+  .url-card:nth-child(3) { transition-delay: 0.4s; }
+
+  .url-side { padding: 14px 16px; }
+  .url-side-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; }
+  .url-side.old .url-side-label { color: var(--accent2); }
+  .url-side.new .url-side-label { color: var(--green); }
+  .url-path { font-family: 'DM Mono', monospace; font-size: 11px; line-height: 1.5; word-break: break-all; }
+  .url-side.old .url-path { color: #8b3a26; }
+  .url-side.new .url-path { color: #1e5c3f; }
+  .url-depth-badge { font-size: 10px; font-weight: 600; margin-top: 6px; display: inline-block; padding: 2px 8px; border-radius: 20px; }
+  .url-side.old .url-depth-badge { background: #fdecea; color: var(--accent2); }
+  .url-side.new .url-depth-badge { background: #e8f5ee; color: var(--green); }
+  .url-arrow { background: var(--paper); padding: 6px 16px; font-size: 14px; color: var(--muted); }
+
+  /* Desktop: side by side */
+  @media (min-width: 580px) {
+    body { padding: 32px; }
+    .title { font-size: 22px; }
+    .url-card { grid-template-columns: 1fr 44px 1fr; grid-template-rows: auto; }
+    .url-side { padding: 18px 20px; }
+    .url-path { font-size: 12px; }
+    .url-arrow { display: flex; align-items: center; justify-content: center; font-size: 18px; padding: 0; }
+  }
+</style>
+</head>
+<body>
+  <h2 class="title">URL Flattening — Before &amp; After</h2>
+  <div class="url-cards">
+    <div class="url-card">
+      <div class="url-side old">
+        <div class="url-side-label">Before</div>
+        <div class="url-path">/All-Products/By-Rooms/Dining/Dining-Tables/Oak-Dining-Tables-99.html</div>
+        <span class="url-depth-badge">5 levels deep</span>
+      </div>
+      <div class="url-arrow">↓</div>
+      <div class="url-side new">
+        <div class="url-side-label">After</div>
+        <div class="url-path">/oak-furniture/dining/dining-tables/</div>
+        <span class="url-depth-badge">3 levels deep</span>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-side old">
+        <div class="url-side-label">Before</div>
+        <div class="url-path">/All-Products/By-Rooms/Bedrooms/Bedside-Cabinet/Oak-Bedside-Cabinets-68.html</div>
+        <span class="url-depth-badge">5 levels deep</span>
+      </div>
+      <div class="url-arrow">↓</div>
+      <div class="url-side new">
+        <div class="url-side-label">After</div>
+        <div class="url-path">/Oak-Bedside-Cabinets</div>
+        <span class="url-depth-badge">1 level deep</span>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-side old">
+        <div class="url-side-label">Before</div>
+        <div class="url-path">/All-Products/By-Rooms/Dining/Dining-8.html</div>
+        <span class="url-depth-badge">4 levels deep</span>
+      </div>
+      <div class="url-arrow">↓</div>
+      <div class="url-side new">
+        <div class="url-side-label">After</div>
+        <div class="url-path">/dining-furniture/</div>
+        <span class="url-depth-badge">1 level deep</span>
+      </div>
+    </div>
+  </div>
+<script>
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.url-card').forEach(c => setTimeout(() => c.classList.add('visible'), 100));
+  });
+</script>
+</body>
+</html>

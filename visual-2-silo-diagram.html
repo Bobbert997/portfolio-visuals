@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topical Silo Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0f0f; --paper: #f7f5f0; --card: #ffffff;
+    --accent: #1a3a5c; --accent2: #c84b2f; --muted: #6b6560; --line: #e2dfd9;
+  }
+  body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); padding: 20px 16px; }
+  .title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--ink); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .silo-wrap { background: var(--card); border-radius: 12px; padding: 20px 16px; }
+
+  .silo-node { border-radius: 8px; padding: 10px 14px; }
+  .node-label { font-size: 12px; font-weight: 600; line-height: 1.3; }
+  .node-url { font-family: 'DM Mono', monospace; font-size: 9px; margin-top: 3px; opacity: 0.7; }
+  .node-l0 { background: var(--accent); color: white; }
+  .node-l1 { background: #e8f0f8; color: var(--accent); border: 1.5px solid #b8cfe8; }
+  .node-l2 { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
+
+  /* Mobile: vertical indented tree (always shown) */
+  .tree-mobile { display: block; }
+  .tree-desktop { display: none; }
+
+  .mobile-silo { display: flex; flex-direction: column; }
+  .v-connector { width: 1.5px; height: 12px; background: var(--line); margin-left: 20px; }
+  .v-connector-cat { width: 1.5px; height: 10px; background: var(--line); margin-left: 38px; }
+  .mobile-subsilo { margin-left: 18px; }
+  .mobile-cat { margin-left: 36px; }
+  .indent-note { font-size: 10px; color: var(--muted); font-style: italic; margin-left: 36px; margin-top: 5px; margin-bottom: 2px; }
+
+  .silo-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* Desktop: horizontal tree */
+  @media (min-width: 640px) {
+    body { padding: 32px; }
+    .title { font-size: 22px; }
+    .silo-wrap { padding: 32px 24px; overflow-x: auto; }
+    .tree-mobile { display: none; }
+    .tree-desktop { display: block; min-width: 560px; }
+    .silo-legend { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+    .legend-item { font-size: 12px; }
+    .node-l0 { min-width: 160px; text-align: center; }
+    .node-l1 { min-width: 120px; text-align: center; }
+    .node-l2 { min-width: 100px; text-align: center; }
+    .v-line { width: 1.5px; background: var(--line); }
+    .h-line { height: 1.5px; background: var(--line); }
+  }
+</style>
+</head>
+<body>
+  <h2 class="title">Topical Silo Architecture — Oak Furniture (Pilot)</h2>
+  <div class="silo-wrap">
+
+    <!-- Mobile tree -->
+    <div class="tree-mobile">
+      <div class="mobile-silo">
+        <div class="silo-node node-l0"><div class="node-label">🌳 Oak Furniture</div><div class="node-url">/oak-furniture/</div></div>
+
+        <div class="v-connector"></div>
+        <div class="silo-node node-l1 mobile-subsilo"><div class="node-label">Oak Dining</div><div class="node-url">/oak-furniture/dining/</div></div>
+        <div class="v-connector-cat"></div>
+        <div class="silo-node node-l2 mobile-cat"><div class="node-label">Dining Tables</div><div class="node-url">.../dining-tables/</div></div>
+        <div class="v-connector-cat"></div>
+        <div class="silo-node node-l2 mobile-cat"><div class="node-label">Dining Chairs</div><div class="node-url">.../dining-chairs/</div></div>
+        <div class="v-connector-cat"></div>
+        <div class="silo-node node-l2 mobile-cat"><div class="node-label">Dining Sets</div><div class="node-url">.../dining-sets/</div></div>
+
+        <div class="v-connector"></div>
+        <div class="silo-node node-l1 mobile-subsilo"><div class="node-label">Oak Living Room</div><div class="node-url">/oak-furniture/living-room/</div></div>
+        <div class="indent-note">↳ Same sub-category pattern</div>
+
+        <div class="v-connector"></div>
+        <div class="silo-node node-l1 mobile-subsilo"><div class="node-label">Oak Bedroom</div><div class="node-url">/oak-furniture/bedroom/</div></div>
+        <div class="indent-note">↳ Same sub-category pattern</div>
+
+        <div class="v-connector"></div>
+        <div class="silo-node node-l1 mobile-subsilo"><div class="node-label">Oak Storage</div><div class="node-url">/oak-furniture/storage/</div></div>
+        <div class="indent-note">↳ Same sub-category pattern</div>
+      </div>
+    </div>
+
+    <!-- Desktop tree -->
+    <div class="tree-desktop">
+      <div style="display:flex;justify-content:center;">
+        <div class="silo-node node-l0"><div class="node-label">🌳 Oak Furniture</div><div class="node-url">/oak-furniture/</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;height:24px;"><div class="v-line" style="height:24px;"></div></div>
+      <div style="height:1.5px;background:var(--line);margin:0 70px;"></div>
+      <div style="display:flex;justify-content:center;gap:0;margin:0 70px;">
+        <div style="flex:1;display:flex;justify-content:center;"><div class="v-line" style="height:18px;"></div></div>
+        <div style="flex:1;display:flex;justify-content:center;"><div class="v-line" style="height:18px;"></div></div>
+        <div style="flex:1;display:flex;justify-content:center;"><div class="v-line" style="height:18px;"></div></div>
+        <div style="flex:1;display:flex;justify-content:center;"><div class="v-line" style="height:18px;"></div></div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:10px;">
+        <div class="silo-node node-l1"><div class="node-label">Oak Dining</div><div class="node-url">/oak-furniture/dining/</div></div>
+        <div class="silo-node node-l1"><div class="node-label">Oak Living Room</div><div class="node-url">/oak-furniture/living-room/</div></div>
+        <div class="silo-node node-l1"><div class="node-label">Oak Bedroom</div><div class="node-url">/oak-furniture/bedroom/</div></div>
+        <div class="silo-node node-l1"><div class="node-label">Oak Storage</div><div class="node-url">/oak-furniture/storage/</div></div>
+      </div>
+      <div style="display:flex;justify-content:flex-start;padding-left:calc(50% - 255px);height:18px;">
+        <div style="width:120px;display:flex;justify-content:center;"><div class="v-line" style="height:18px;"></div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding-left:calc(50% - 255px);">
+        <div class="silo-node node-l2"><div class="node-label">Dining Tables</div><div class="node-url">.../dining-tables/</div></div>
+        <div class="silo-node node-l2"><div class="node-label">Dining Chairs</div><div class="node-url">.../dining-chairs/</div></div>
+        <div class="silo-node node-l2"><div class="node-label">Dining Sets</div><div class="node-url">.../dining-sets/</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px;padding-left:calc(50% - 255px);font-style:italic;">↳ Same pattern repeats under Living Room, Bedroom, Storage</p>
+    </div>
+
+    <div class="silo-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Silo Hub — distributes authority</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e8f0f8;border:1.5px solid #b8cfe8;"></div>Sub-Silo — room grouping</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--paper);border:1px solid var(--line);"></div>Category Page</div>
+    </div>
+  </div>
+</body>
+</html>
