@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topical Silo Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0f0f; --paper: #f7f5f0; --card: #ffffff;
+    --accent: #1a3a5c; --accent2: #c84b2f; --muted: #6b6560;
+    --line: #e2dfd9; --green: #2d6a4f;
+  }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--paper); color: var(--ink); padding: 32px;
+  }
+  .label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 6px;
+  }
+  .title {
+    font-family: 'DM Serif Display', serif; font-size: 22px;
+    color: var(--ink); margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .silo-wrap {
+    background: var(--card); border-radius: 12px;
+    padding: 32px 28px; overflow-x: auto;
+  }
+  .silo-tree { min-width: 620px; }
+  .silo-node {
+    border-radius: 8px; padding: 10px 14px;
+    text-align: center; flex-shrink: 0;
+  }
+  .node-label { font-size: 12px; font-weight: 600; line-height: 1.3; }
+  .node-url {
+    font-family: 'DM Mono', monospace; font-size: 9.5px;
+    margin-top: 4px; opacity: 0.7;
+  }
+  .node-l0 { background: var(--accent); color: white; min-width: 160px; }
+  .node-l1 { background: #e8f0f8; color: var(--accent); border: 1.5px solid #b8cfe8; min-width: 130px; }
+  .node-l2 { background: var(--paper); color: var(--ink); border: 1px solid var(--line); min-width: 110px; }
+  .v-line { width: 1.5px; background: var(--line); }
+  .h-line { height: 1.5px; background: var(--line); }
+  .silo-legend { display: flex; gap: 20px; margin-top: 28px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* fade in */
+  .silo-wrap { opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .silo-wrap.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+  <p class="label">Visual 02</p>
+  <h2 class="title">Topical Silo Architecture — Oak Furniture (Pilot)</h2>
+  <div class="silo-wrap" id="siloWrap">
+    <div class="silo-tree">
+
+      <!-- L0 Hub -->
+      <div style="display:flex; justify-content:center; margin-bottom:0;">
+        <div class="silo-node node-l0">
+          <div class="node-label">🌳 Oak Furniture</div>
+          <div class="node-url">/oak-furniture/</div>
+        </div>
+      </div>
+
+      <!-- stem down -->
+      <div style="display:flex; justify-content:center; height:28px;">
+        <div class="v-line" style="height:28px;"></div>
+      </div>
+
+      <!-- horizontal bar across L1 -->
+      <div style="display:flex; justify-content:center; position:relative; height:1.5px; margin:0 80px;">
+        <div class="h-line" style="width:100%;"></div>
+      </div>
+
+      <!-- L1 stems -->
+      <div style="display:flex; justify-content:center; gap:0; margin:0 80px;">
+        <div style="flex:1; display:flex; justify-content:center; height:20px;">
+          <div class="v-line" style="height:20px;"></div>
+        </div>
+        <div style="flex:1; display:flex; justify-content:center; height:20px;">
+          <div class="v-line" style="height:20px;"></div>
+        </div>
+        <div style="flex:1; display:flex; justify-content:center; height:20px;">
+          <div class="v-line" style="height:20px;"></div>
+        </div>
+        <div style="flex:1; display:flex; justify-content:center; height:20px;">
+          <div class="v-line" style="height:20px;"></div>
+        </div>
+      </div>
+
+      <!-- L1 nodes -->
+      <div style="display:flex; justify-content:center; gap:12px;">
+        <div class="silo-node node-l1">
+          <div class="node-label">Oak Dining</div>
+          <div class="node-url">/oak-furniture/dining/</div>
+        </div>
+        <div class="silo-node node-l1">
+          <div class="node-label">Oak Living Room</div>
+          <div class="node-url">/oak-furniture/living-room/</div>
+        </div>
+        <div class="silo-node node-l1">
+          <div class="node-label">Oak Bedroom</div>
+          <div class="node-url">/oak-furniture/bedroom/</div>
+        </div>
+        <div class="silo-node node-l1">
+          <div class="node-label">Oak Storage</div>
+          <div class="node-url">/oak-furniture/storage/</div>
+        </div>
+      </div>
+
+      <!-- stem from first L1 node down to L2 (dining only, for readability) -->
+      <div style="display:flex; justify-content:flex-start; padding-left:calc(50% - 270px); gap:12px; height:20px; margin-top:0;">
+        <div style="width:130px; display:flex; justify-content:center;">
+          <div class="v-line" style="height:20px;"></div>
+        </div>
+      </div>
+
+      <!-- L2: Oak Dining children -->
+      <div style="display:flex; gap:12px; justify-content:flex-start; padding-left:calc(50% - 270px);">
+        <div class="silo-node node-l2">
+          <div class="node-label">Dining Tables</div>
+          <div class="node-url">.../dining-tables/</div>
+        </div>
+        <div class="silo-node node-l2">
+          <div class="node-label">Dining Chairs</div>
+          <div class="node-url">.../dining-chairs/</div>
+        </div>
+        <div class="silo-node node-l2">
+          <div class="node-label">Dining Sets</div>
+          <div class="node-url">.../dining-sets/</div>
+        </div>
+      </div>
+
+      <p style="font-size:11px; color:var(--muted); margin-top:12px; padding-left:calc(50% - 270px); font-style:italic;">
+        ↳ Same pattern repeats under Living Room, Bedroom, Storage
+      </p>
+
+    </div>
+
+    <div class="silo-legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--accent)"></div>
+        Silo Hub — entry point, distributes authority
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#e8f0f8; border:1.5px solid #b8cfe8;"></div>
+        Sub-Silo — room / use-case grouping
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--paper); border:1px solid var(--line);"></div>
+        Category Page — commercial intent
+      </div>
+    </div>
+  </div>
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('siloWrap').classList.add('visible'), 100);
+  });
+</script>
+</body>
+</html>

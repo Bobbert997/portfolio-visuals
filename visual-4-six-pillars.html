@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Six-Pillar Execution Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0f0f; --paper: #f7f5f0; --card: #ffffff;
+    --accent: #1a3a5c; --accent2: #c84b2f; --muted: #6b6560;
+    --line: #e2dfd9; --green: #2d6a4f;
+  }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--paper); color: var(--ink); padding: 32px;
+  }
+  .label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 6px;
+  }
+  .title {
+    font-family: 'DM Serif Display', serif; font-size: 22px;
+    color: var(--ink); margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pillars-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px; background: var(--line);
+    border-radius: 12px; overflow: hidden;
+  }
+  .pillar-card {
+    background: var(--card); padding: 24px 20px;
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .pillar-card.visible { opacity: 1; transform: none; }
+  .pillar-card:nth-child(1) { transition-delay: 0.05s; }
+  .pillar-card:nth-child(2) { transition-delay: 0.12s; }
+  .pillar-card:nth-child(3) { transition-delay: 0.19s; }
+  .pillar-card:nth-child(4) { transition-delay: 0.26s; }
+  .pillar-card:nth-child(5) { transition-delay: 0.33s; }
+  .pillar-card:nth-child(6) { transition-delay: 0.40s; }
+  .pillar-number {
+    font-family: 'DM Serif Display', serif; font-size: 48px;
+    line-height: 1; color: var(--line);
+    position: absolute; top: 12px; right: 14px;
+    font-style: italic;
+  }
+  .pillar-priority {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 8px;
+  }
+  .pillar-name {
+    font-family: 'DM Serif Display', serif; font-size: 16px;
+    line-height: 1.25; color: var(--ink);
+    margin-bottom: 8px; position: relative;
+  }
+  .pillar-desc {
+    font-size: 12px; color: var(--muted);
+    line-height: 1.55; position: relative;
+  }
+  .pillar-card.foundation { background: var(--accent); }
+  .pillar-card.foundation .pillar-priority { color: #7fa8cc; }
+  .pillar-card.foundation .pillar-name { color: white; }
+  .pillar-card.foundation .pillar-desc { color: #a8c4dc; }
+  .pillar-card.foundation .pillar-number { color: rgba(255,255,255,0.08); }
+  .order-note {
+    margin-top: 16px; font-size: 11px; color: var(--muted);
+    font-style: italic; letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+  <p class="label">Visual 04</p>
+  <h2 class="title">Six-Pillar Execution Framework</h2>
+  <div class="pillars-grid">
+
+    <div class="pillar-card foundation">
+      <div class="pillar-number">1</div>
+      <p class="pillar-priority">Foundation · First</p>
+      <h3 class="pillar-name">Indexing &amp; De-Indexing Control</h3>
+      <p class="pillar-desc">Daily GSC workflows. Index priority pages, remove obsolete and parameterised URLs. Clean crawl budget before anything else.</p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-number">2</div>
+      <p class="pillar-priority">Multiplier · Second</p>
+      <h3 class="pillar-name">Site Structure &amp; Topical Silos</h3>
+      <p class="pillar-desc">Define silos, flatten URL depth to ≤3 levels, align navigation, breadcrumbs, and internal links to silo hierarchy.</p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-number">3</div>
+      <p class="pillar-priority">Clarity · Third</p>
+      <h3 class="pillar-name">Keyword Mapping &amp; Cannibalisation</h3>
+      <p class="pillar-desc">One primary keyword per canonical page per silo. Merge or redirect competing pages within and across silos.</p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-number">4</div>
+      <p class="pillar-priority">Consolidation · Fourth</p>
+      <h3 class="pillar-name">Redirect &amp; Canonical Strategy</h3>
+      <p class="pillar-desc">301 all legacy URLs into correct silo pages. Remove redirect chains. Canonicalise filter and parameter variants to silo entry points.</p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-number">5</div>
+      <p class="pillar-priority">Alignment · Fifth</p>
+      <h3 class="pillar-name">Content Reframing</h3>
+      <p class="pillar-desc">Rewrite category intros for silo context. Improve H1–H3 structure. Strengthen intra-silo internal linking throughout.</p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-number">6</div>
+      <p class="pillar-priority">Expansion · Last</p>
+      <h3 class="pillar-name">Content Refresh &amp; Net-New Pages</h3>
+      <p class="pillar-desc">Expand only after structure is stable. No new pages unless they strengthen an existing silo. No exceptions.</p>
+    </div>
+
+  </div>
+  <p class="order-note">↑ Pillars executed in strict priority order — sequence is non-negotiable.</p>
+
+<script>
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.pillar-card').forEach(c => {
+      setTimeout(() => c.classList.add('visible'), 100);
+    });
+  });
+</script>
+</body>
+</html>
